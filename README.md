@@ -5,6 +5,9 @@ Adding some sample Car and Bike class.
 In order to achieve loose coupling between the objects, we have to create interface which is 
 implemented by Car and Bike class. <br>So adding Vehicle interface with drive abstract method.
 
+<p align="center">
+  <img src="./images/vehicle-interface-uml.png" />
+</p>
 
 ## Dependency Injection with XML Configuration
 
@@ -39,3 +42,11 @@ Changing the springConfig.xml with the following configuration
 ```
 
 then adding ```@Component``` annotation above the Car and Bike class with ```import org.springframework.stereotype.Component```
+
+## bean property
+
+To demonstrate bean property, lets create ```Tyre``` Class
+
+<p align="center">
+  <img src="./images/tyre-class-uml.png" />
+</p>
