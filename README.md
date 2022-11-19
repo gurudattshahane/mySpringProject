@@ -58,3 +58,19 @@ then adding this bean to the springConfig.xml file
 </bean>
 ```
 This way we can pass values to the Tyre class object which is being injected to the main ```App``` class
+
+## Constructor Injection
+In order to pass values directly to the constructor while object creation, we have to change the xml as shown below
+```xml
+<bean id="tyre" class="com.mygroup.springPractice.Tyre">
+	<!--	<property name="brand" value="MRF"></property> -->
+	<constructor-arg value="Ceat"></constructor-arg>
+</bean>
+```
+and also we have to add constructor method in Tyre class like this
+```java
+public Tyre(String brand) {
+	super();
+	this.brand = brand;
+}
+```
