@@ -98,7 +98,7 @@ For this demo, we have created classes and interface in the following UML diagra
 </p>
 
 In this case, all the bean configurations reside in the class, we used ```AppConfig.java``` class for bean configuration.
-That means, we no longer need xml file to configure our beans. In the previous examples, we were using ```ClassPathApplicationContext``` class to set the xml configurations, now we have to use different class called ```AnnotationConfigApplicationContext``` which takes in our ```AppConfig.class``` as input and sets the bean configuration.
+That means, we no longer need xml file to configure our beans. In the previous examples, we were using ```ClassPathXmlApplicationContext``` class to set the xml configurations, now we have to use different class called ```AnnotationConfigApplicationContext``` which takes in our ```AppConfig.class``` as input and sets the bean configuration.
 
 So whenever we have a class which depends on other class, we have to ensure that we have created the bean for it in the ```AppConfig.java``` class and we are using ```@Autowired``` annotation above the object instance.
 
@@ -134,3 +134,60 @@ public class AppConfig {
 
 ```
 here method name does not matter, only type of return matters for object injection.
+
+## Annotations: Component, Autowired, Primary, Qualifier
+
+In the previous example, we had defined our beans configuration in the AppConfig class with ```@Bean``` annotation. There is another way to achieve the same without actually adding any configuration methods.
+
+To achieve that simplicity, there are some steps
+1. Add the ```@ComponentScan(basePackages = "PACKAGE_NAME")``` annotation above the config class definition as shown below
+
+    ```java
+    package com.mygroup.springPractice;
+
+    //import org.springframework.context.annotation.Bean;
+    import org.springframework.context.annotation.ComponentScan;
+    import org.springframework.context.annotation.Configuration;
+
+    @Configuration
+    @ComponentScan(basePackages = "com.mygroup.springPractice")
+    public class AppConfig {
+        
+    //	@Bean
+    //	public Samsung getphone() {
+    //		return new Samsung();
+    //	}
+    //	
+    //	@Bean
+    //	public MobileProcessor getprocessor() {
+    //		return new Snapdragon();
+    //	}
+    }
+    ```
+2. Ensure that every class in the package has ```@Component``` annotation
+
+and that's it. This is how simple it is.
+
+We may come accross scenario like we have mulitple implementation of a same interface, for example, we may have two implementation of ```MobileProcessor``` interface like Snapdragon and Mediatek. So in this case, it will ambiguous to java that which object to provide when asked for MobileProcessor. So we two solutions
+1. ```@Primary``` annotation:<br>
+   This annotation is used above the class whose object that we want to provide by default when asked for MobileProcessor object.
+   Example:
+   ```java
+    import org.springframework.context.annotation.Primary;
+    import org.springframework.stereotype.Component;
+
+    @Component
+    @Primary
+    public class Snapdragon implements MobileProcessor
+   ```
+
+2. ```@Qualifier``` annotation:<br>
+   This annotation is used when we want to decide which object we want while instantiating the MobileProcessor object.
+   For Example:
+    ```java
+    @Autowired
+	@Qualifier("mediatek")
+	private MobileProcessor cpu;
+    ```
+   
+   
