@@ -5,7 +5,7 @@ Adding some sample Car and Bike class.
 In order to achieve loose coupling between the objects, we have to create interface which is 
 implemented by Car and Bike class. <br>So adding Vehicle interface with drive abstract method.
 
-<p align="center">
+<p>
   <img src="./images/vehicle-interface-uml.png" />
 </p>
 
@@ -47,7 +47,7 @@ then adding ```@Component``` annotation above the Car and Bike class with ```imp
 
 To demonstrate bean property, lets create ```Tyre``` Class
 
-<p align="center">
+<p>
   <img src="./images/tyre-class-uml.png" />
 </p>
 
@@ -90,3 +90,47 @@ For this demo, we are using annotation based configuration for Tyre class as wel
 <!-- 		<property name="brand" value="MRF"></property>  -->
 <!-- 	</bean> -->
 ```
+## Complete Annotation based Configuration | Bean configuration
+For this demo, we have created classes and interface in the following UML diagram fashion
+
+<p>
+    <img width="500px" src="./images/samsung-example-uml.png" />
+</p>
+
+In this case, all the bean configurations reside in the class, we used ```AppConfig.java``` class for bean configuration.
+That means, we no longer need xml file to configure our beans. In the previous examples, we were using ```ClassPathApplicationContext``` class to set the xml configurations, now we have to use different class called ```AnnotationConfigApplicationContext``` which takes in our ```AppConfig.class``` as input and sets the bean configuration.
+
+So whenever we have a class which depends on other class, we have to ensure that we have created the bean for it in the ```AppConfig.java``` class and we are using ```@Autowired``` annotation above the object instance.
+
+Example: Following code in our main ```App.java``` shows Samsung object being injected by bean configuration which resides in ```Appconfig.java```
+```java
+ApplicationContext factory = new AnnotationConfigApplicationContext(AppConfig.class);
+Samsung s7 = factory.getBean(Samsung.class);
+s7.specs();
+s7.getCpu().process();
+```
+
+To confure beans in ```AppConfig.java```, we have to create methods that returns respective object, in this case we want Samsung and MobileProcessor object.
+so our AppConfig class will look like this
+```java
+package com.mygroup.springPractice;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class AppConfig {
+	
+	@Bean
+	public Samsung getphone() {
+		return new Samsung();
+	}
+	
+	@Bean
+	public MobileProcessor getprocessor() {
+		return new Snapdragon();
+	}
+}
+
+```
+here method name does not matter, only type of return matters for object injection.

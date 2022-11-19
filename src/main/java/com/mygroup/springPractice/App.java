@@ -1,6 +1,7 @@
 package com.mygroup.springPractice;
 
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -27,5 +28,11 @@ public class App
         // Autowired Annotation
         Car carobj = (Car)context.getBean("car");
         carobj.drive();
+        
+        // Complete Annotation based injection
+        ApplicationContext factory = new AnnotationConfigApplicationContext(AppConfig.class);
+        Samsung s7 = factory.getBean(Samsung.class);
+        s7.specs();
+        s7.getCpu().process();
     }
 }
