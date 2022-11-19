@@ -24,5 +24,8 @@ public class App
         // Injecting field value with bean property from xml in Tyre class object
         Tyre t = (Tyre)context.getBean("tyre");
         System.out.println(t);
+        // Autowired Annotation
+        Car carobj = (Car)context.getBean("car");
+        carobj.drive();
     }
 }

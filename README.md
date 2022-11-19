@@ -74,3 +74,19 @@ public Tyre(String brand) {
 	this.brand = brand;
 }
 ```
+
+## Autowired Injection
+
+For this, We have created tyre object in the Car class field. So this means that our Car class depends upon Tyre class.<br>
+To automatically inject the tyre object, we have to use ```@Autowired``` annotation from ```import org.springframework.beans.factory.annotation.Autowired``` above the object like shown below
+```java
+@Autowired
+private Tyre tyre;
+```
+For this demo, we are using annotation based configuration for Tyre class as well. So we have added ```@Component``` annotation above the Tyre class name and commented the construction method as it is not required for this demo and modified toString method. In addition to that, we also have to comment out the following xml code as
+```xml
+<!-- 	<bean id="tyre" class="com.mygroup.springPractice.Tyre"> -->
+<!-- 		<constructor-arg value="Ceat"></constructor-arg> -->
+<!-- 		<property name="brand" value="MRF"></property>  -->
+<!-- 	</bean> -->
+```
