@@ -50,3 +50,11 @@ To demonstrate bean property, lets create ```Tyre``` Class
 <p align="center">
   <img src="./images/tyre-class-uml.png" />
 </p>
+
+then adding this bean to the springConfig.xml file
+```xml
+<bean id="tyre" class="com.mygroup.springPractice.Tyre">
+	<property name="brand" value="MRF"></property>
+</bean>
+```
+This way we can pass values to the Tyre class object which is being injected to the main ```App``` class
