@@ -2,7 +2,7 @@
 This project is created to learn spring framework
 
 Adding some sample Car and Bike class.
-In order to achieve loose coupling between the objects, we have to create interface which is 
+In order to achieve loose coupling between the dependencies, we have to create interface which is 
 implemented by Car and Bike class. <br>So adding Vehicle interface with drive abstract method.
 
 <p>
